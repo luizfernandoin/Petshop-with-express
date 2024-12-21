@@ -32,6 +32,12 @@ petshopRouter.post("/", async (request: Request, response: Response) => {
     }
 
     try {
+        const existingPetshop = await petshopService.getPetshopByCNPJ(cnpj);
+        if (existingPetshop) {
+            response.status(400).json({ error: 'CNPJ já cadastrado' });
+            return;
+        }
+
         const newPetshop = await petshopService.createPetshop({ name, cnpj });
 
         response.status(201).json(newPetshop);

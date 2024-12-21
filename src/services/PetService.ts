@@ -3,9 +3,15 @@ import prisma from "src/config/prismaClient";
 
 
 class PetService {
-    async getAllPets() {
+    async getAllPets(petshopId: string) {
         try {
-            const pets = await prisma.pet.findMany();
+            const pets = await prisma.pet.findMany(
+                {
+                    where: {
+                        petshopId
+                    }
+                }
+            );
 
             return pets;
         } catch (error) {
@@ -56,6 +62,24 @@ class PetService {
             return pet;
         } catch (error) {
             throw new Error('Erro ao atualizar pet');
+        }
+    }
+
+    async vaccinatePet(petId: string, petshopId: string) {
+        try {
+            const pet = await prisma.pet.update({
+                where: {
+                    id: petId,
+                    petshopId
+                },
+                data: {
+                    vaccinated: true
+                }
+            });
+
+            return pet;
+        } catch (error) {
+            throw new Error('Erro ao atualizar status de vacinação');
         }
     }
 }

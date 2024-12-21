@@ -16,6 +16,23 @@ class PetshopService {
         }    
     }
 
+    async getPetshopByCNPJ(cnpj: string): Promise<Petshop | null> {
+        try {
+            const petshop = await prisma.petshop.findFirst({
+                where: {
+                    cnpj
+                },
+                include: {
+                    pets: true
+                }
+            });
+
+            return petshop;
+        } catch (error) {
+            throw new Error('Erro ao buscar petshop por CNPJ');
+        }
+    }
+
     async createPetshop(newPetshop: petshopDTO): Promise<Petshop> {
         try {
             const createdPetshop = await prisma.petshop.create({

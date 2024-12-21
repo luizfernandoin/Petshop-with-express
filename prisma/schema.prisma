@@ -12,7 +12,7 @@ model Pet {
   name String
   type String
   description String
-  vaccinated String
+  vaccinated Boolean @default(false)
   deadline_vaccination DateTime
   created_at DateTime @default(now())
   petshopId String
