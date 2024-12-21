@@ -1,4 +1,4 @@
-import { Petshop, petshopDTO } from "src/@types/petshop";
+import { Petshop, petshopDTO, updatePetshopDTO } from "src/@types/petshop";
 import prisma from "../config/prismaClient";
 
 class PetshopService {
@@ -51,6 +51,24 @@ class PetshopService {
             return deletedPetshop;
         } catch (error) {
             throw new Error("Erro ao deletar o petshop");
+        }
+    }
+
+    async updatePetshop(petshopId: string, newPetshop: updatePetshopDTO) {
+        try {
+            const updatedPetshop = await prisma.petshop.update({
+                where: {
+                    id: petshopId
+                },
+                data: newPetshop,
+                include: {
+                    pets: true
+                }
+            });
+
+            return updatedPetshop;
+        } catch (error) {
+            throw new Error("Erro ao atualizar o petshop");
         }
     }
 }

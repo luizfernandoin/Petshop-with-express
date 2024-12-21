@@ -1,8 +1,9 @@
 import { Petshop } from "@prisma/client";
-import { Request } from "express";
 
-declare module "express-serve-static-core" {
-  interface Request {
-    petshop?: Petshop;
+declare global {
+  declare namespace Express {
+    export interface Request {
+      petshop?: Petshop;
+    }
   }
 }
