@@ -1,3 +1,4 @@
+import exp from 'constants';
 import { Petshop } from './petshop';
 
 export interface Pet {
@@ -11,11 +12,18 @@ export interface Pet {
     petshopId: string;
 }
 
-
 export interface petDTO {
     name: string;
     type: string;
     description: string;
     vaccinated: string;
     deadline_vaccination: string;
+}
+
+export interface updatePetDTO {
+    name?: string;
+    type?: string;
+    description?: string;
+    vaccinated?: string;
+    deadline_vaccination?: string;
 }

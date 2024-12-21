@@ -1,6 +1,6 @@
 import express, {Request, Response} from "express";
-import UserService from "@services/UserService";
-import router from "./routes";
+import UserService from "@services/PetService";
+import router from "./routes/routes";
 
 const app = express();
 const PORT = process.env.PORT || 3000;
